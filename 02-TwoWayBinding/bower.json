@@ -1,0 +1,23 @@
+{
+  "name": "hellow_world_react",
+  "authors": [
+    "poc <poc7667@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.2.1"
+  },
+  "devDependencies": {
+    "babel": "*"
+  }
+}
