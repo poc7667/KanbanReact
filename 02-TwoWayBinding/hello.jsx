@@ -1,25 +1,34 @@
 import React from 'react';
 
 class Hello extends React.Component{
-    constructor(){
-        super();
+    constructor(props, context){
+        super(props, context);
         this.state = {
-            alias: 'Standford'
+            username: ''
         }
-        this.clickCallBack = this.clickCallBack.bind(this);
     }
-    clickCallBack(){
+    setUsername(evt){
+        console.log(evt.target.value);
         this.setState({
-            alias: "YOYOYO"
+            username: evt.target.value
         })
     }
     render(){
-        const name = "VIDEO INPUT";
-        return (<div>
+        var message = "";
+        if(this.state.username){
+            message = (
+                <h1> Hello {this.state.username}</h1>
+                )
+        }
+        return (
+                <div>
                     <h1> Input your name </h1>
                     <p><input type="text" 
+                    value={this.state.username}
                     onChange={this.setUsername.bind(this)}/> </p>
-            </div>);
+                    {message}
+                </div>
+            );
     }
 
 }

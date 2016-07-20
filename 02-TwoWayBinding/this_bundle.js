@@ -171,40 +171,12 @@
 	// shim for using process in browser
 	
 	var process = module.exports = {};
-	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -220,7 +192,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = setTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -237,7 +209,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    clearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -249,7 +221,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        setTimeout(drainQueue, 0);
 	    }
 	};
 	
@@ -21121,29 +21093,37 @@
 	var Hello = function (_React$Component) {
 	    _inherits(Hello, _React$Component);
 	
-	    function Hello() {
+	    function Hello(props, context) {
 	        _classCallCheck(this, Hello);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).call(this, props, context));
 	
 	        _this.state = {
-	            alias: 'Standford'
+	            username: ''
 	        };
-	        _this.clickCallBack = _this.clickCallBack.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(Hello, [{
-	        key: 'clickCallBack',
-	        value: function clickCallBack() {
+	        key: 'setUsername',
+	        value: function setUsername(evt) {
+	            console.log(evt.target.value);
 	            this.setState({
-	                alias: "YOYOYO"
+	                username: evt.target.value
 	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var name = "VIDEO INPUT";
+	            var message = "";
+	            if (this.state.username) {
+	                message = _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    ' Hello ',
+	                    this.state.username
+	                );
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -21155,9 +21135,12 @@
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
-	                    _react2.default.createElement('input', { type: 'text' }),
+	                    _react2.default.createElement('input', { type: 'text',
+	                        value: this.state.username,
+	                        onChange: this.setUsername.bind(this) }),
 	                    ' '
-	                )
+	                ),
+	                message
 	            );
 	        }
 	    }]);
