@@ -6,10 +6,11 @@ https://github.com/poc7667/ReactOnClassPractice/tree/master/hw1/components
 
 [http://react-reducx.pochsu.me/hw1/](http://react-reducx.pochsu.me/hw1/)
 
-# Server
+# Server Structure
 
-    Nginx -> reverse proxy to Python simple http server
+- Nginx -> reverse proxy to Python simple http server
 
 # Deployment tool
 
-    Capistrano
+- Ansible (Setup the requirements)
+- Capistrano (Deploy application)
