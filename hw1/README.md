@@ -1,6 +1,6 @@
 # Demo page
 
-    ![http://react-reducx.pochsu.me/hw1/](http://react-reducx.pochsu.me/hw1/)
+    [http://react-reducx.pochsu.me/hw1/](http://react-reducx.pochsu.me/hw1/)
 
 # Server
 
