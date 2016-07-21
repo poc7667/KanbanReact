@@ -1,3 +1,10 @@
+# instructors
+
+> minwu.training@gmail.com
+
+this.props , this.state 控制了 components 該怎麼去render
+
+用data flow 去思考 react, abadon DOM manipulation.
 
 # Webpack cheatsheet
 
