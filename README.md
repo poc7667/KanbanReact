@@ -1,3 +1,10 @@
+# launch webpack-dev-server
+
+go to the parent folder of `Kanban`
+
+run `webpack-dev-server`
+
+
 # instructors
 
 > minwu.training@gmail.com
