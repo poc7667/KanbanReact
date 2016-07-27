@@ -10,7 +10,7 @@ class CheckList extends React.Component{
             </li>
         ));
 
-        return(<div>
+        return(<div className="checklist">
                 <ul>{tasks}</ul>
                 <input type="text"
                         className="checklist_add_task"

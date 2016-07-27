@@ -15,7 +15,7 @@ class List extends React.Component{
                 />}
         );
         return(
-            <div>
+            <div className="list">
                 <h3> {this.props.title} </h3>
                 {cards}
             </div>

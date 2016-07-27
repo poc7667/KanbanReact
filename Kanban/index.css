@@ -61,7 +61,19 @@ ul {
   overflow: auto;
   border: 1px solid #e5e5df;
   border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  /*box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);*/
+}
+
+#todo > .card {
+  border-left: 7px solid #3A7E28;
+}
+
+#in-progress > .card {
+  border-left: 7px solid #BD8D31;
+}
+
+#done > .card {
+  border-left: 7px solid #e5e5df;
 }
 
 .card_title {
@@ -69,14 +81,23 @@ ul {
   border-bottom: solid 5px transparent;
 }
 
+.card_title_is_open {
+  font-weight: bold;
+  border-bottom: solid 5px transparent;
+}
+
 .card_title:before {
   display: inline-block;
   width: 1em;
-  content: '>';
+  font-family: FontAwesome;
+  content: "\f105";
 }
 
 .card_title_is_open:before {
-  content: 'v';
+  display: inline-block;
+  width: 1em;
+  font-family: FontAwesome;
+  content: "\f107";
 }
 
 .checklist_task:first-child {
@@ -85,12 +106,13 @@ ul {
   border-top: dashed 1px #ddd;
 }
 
-.checklist__task--remove:after{
+.checklist_task_remove:after{
   display: inline-block;
+  margin-left: 5px;
   color: #d66;
-  content: "+";
+  font-family: FontAwesome;
+  content: "\f00d";
 }
-
 
 .checklist_add_task {
   border: 1px dashed #bbb;
