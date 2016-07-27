@@ -1,3 +1,12 @@
+# 2016-07-26
+
+webpack-dev-server
+
+hotswap 動態更新
+
+
+
+
 # instructors
 
 > minwu.training@gmail.com
