@@ -60,29 +60,32 @@ export default class App extends React.Component {
     }
 
     deleteTask(cardId, taskId, taskIndex) {
-        // let cardIndex = this.state.cards.findIndex(
-        //         (card) => card._id === cardId
-        //     );
+        let cardIndex = this.state.cards.findIndex(
+                (card) => card._id === cardId
+            );
 
-        // let nextState = update(this.state.cards, {
-        //     [cardIndex]: {
-        //         tasks: {$splice: [[taskIndex, 1]]}
-        //     }
-        // });
 
-        // this.setState({cards: nextState});
+        // 我們要保存 previous state 才可以保存上次狀態
+        let nextState = update(this.state.cards, {
+            [cardIndex]: {
+                tasks: {$splice: [[taskIndex, 1]]}
+            }
+        });        
+        debugger;
+
+        this.setState({cards: nextState});
 
         console.log(`delete card ${cardId}, ${taskId}, ${taskIndex}`);
-        // fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
-        //     method: 'delete',
-        //     headers: API_JSON_HEADERS
-        // });
+        fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
+            method: 'delete',
+            headers: API_JSON_HEADERS
+        });
     }    
 
 
     render(){
         return (<div>
-            <h1>Hello Kanban Project</h1>
+            <h1>Kanban Project</h1>
             <KanbanContainer cards={this.state.cards} 
                             taskCallbacks={
                                 {

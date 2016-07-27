@@ -21,12 +21,12 @@ class CheckList extends React.Component{
                                         task._id,
                                         taskIndex
                                     )}
-
-                >DELETE IT(CLICK ME!) </a>       
+                />                
             </li>
         ));
 
-        return(<div className="checklist">
+        return(
+        <div className="checklist">
                 <ul>{tasks}</ul>
                 <input type="text"
                         className="checklist_add_task"
