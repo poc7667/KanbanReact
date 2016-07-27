@@ -1,5 +1,11 @@
+var webpack = require('webpack')
+
 module.exports = {
-    entry: './index.js',
+    entry: [
+        // 'webpack-dev-server/client?https://0.0.0.0:8081',
+        // 'webpack/hot/only-dev-server',
+        './index.js'
+        ],
     output: {
         path: './',
         filename: 'this_bundle.js'
@@ -14,5 +20,11 @@ module.exports = {
                 presets: ['es2015', 'react']
             }
         }]
-    }
+    },
+    // devServer: {
+    //     hot: true
+    // },
+    // plugins:[
+    //     new webpack.HotModuleReplacementPlugin()
+    // ]
 }
