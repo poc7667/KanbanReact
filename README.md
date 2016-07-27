@@ -13,7 +13,6 @@ this.props , this.state 控制了 components 該怎麼去render
 - [webpack 使用教程](https://www.zfanw.com/blog/webpack-tutorial.html)
 
 
-
 # Resources
 
-![c9 workspace on-class](https://ide.c9.io/winwust/ucsc-react-class-kanban)
+[c9 workspace on-class](https://ide.c9.io/winwust/ucsc-react-class-kanban)
