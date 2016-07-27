@@ -2,7 +2,8 @@ var webpack = require('webpack')
 
 module.exports = {
     entry: [
-        // 'webpack-dev-server/client?https://0.0.0.0:8081',
+        // 'webpack-dev-server/client?http://0.0.0.0:8081',
+        // 'webpack/hot/only-dev-server',
         // 'webpack/hot/only-dev-server',
         './index.js'
         ],
@@ -21,10 +22,11 @@ module.exports = {
             }
         }]
     },
-    // devServer: {
-    //     hot: true
-    // },
-    // plugins:[
-    //     new webpack.HotModuleReplacementPlugin()
-    // ]
+    devServer: {
+        hot: true
+    },
+    plugins:[
+        // new webpack.HotModuleReplacementPlugin()
+        // new webpack.HotModuleReplacementPlugin()
+    ]
 }
