@@ -26,11 +26,71 @@ export default class App extends React.Component {
             .catch((err)=>{console.log(err)});
     }
 
+    addTask(cardId, taskName) {
+        let cardIndex = this.state.cards.findIndex(
+                (card) => card._id === cardId
+            );
+
+//      let newTask = {
+//          id: uuid.v4(), 
+//          name: taskName,
+//          done: false
+//      };
+        
+//      let nextState = update(this.state.cards, {
+//          [cardIndex]: {
+//              tasks: {$push: [newTask]}
+//          }
+//      });
+
+//      this.setState({cards: nextState});
+
+        fetch(`${API_URL}/cards/${cardId}/tasks`, {
+            method: 'post',
+            headers: API_JSON_HEADERS,
+            body: JSON.stringify({taskname: taskName})
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+            let nextState = update(this.state.cards, {
+                [cardIndex]: { $set: responseData }
+            });
+            this.setState({cards: nextState});
+        });
+    }
+
+    deleteTask(cardId, taskId, taskIndex) {
+        // let cardIndex = this.state.cards.findIndex(
+        //         (card) => card._id === cardId
+        //     );
+
+        // let nextState = update(this.state.cards, {
+        //     [cardIndex]: {
+        //         tasks: {$splice: [[taskIndex, 1]]}
+        //     }
+        // });
+
+        // this.setState({cards: nextState});
+
+        console.log(`delete card ${cardId}, ${taskId}, ${taskIndex}`);
+        // fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
+        //     method: 'delete',
+        //     headers: API_JSON_HEADERS
+        // });
+    }    
+
 
     render(){
         return (<div>
             <h1>Hello Kanban Project</h1>
-            <KanbanContainer cards={this.state.cards} />
+            <KanbanContainer cards={this.state.cards} 
+                            taskCallbacks={
+                                {
+                                    add: this.addTask.bind(this),
+                                    delete: this.deleteTask.bind(this)
+                                }
+                            }
+            />
         </div>)
         
             
