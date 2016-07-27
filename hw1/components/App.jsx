@@ -1,5 +1,5 @@
 import React from 'react';
-import Contacts from './Contacts.jsx';
+
 
 class App extends React.Component {
 
