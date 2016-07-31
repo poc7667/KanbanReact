@@ -3,6 +3,7 @@ var Card = require('./kanban.card.model');
 
 mongoose.connect('mongodb://localhost/kanbanapi');
 
+var cards = [];
 var card = new Card({
 	title: 'Read the book',
 	description: 'I should read the whole book',
