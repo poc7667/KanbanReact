@@ -1,30 +1,30 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
 var app = express();
+var DEFAULT_APP_SERVER_PORT = 8081;
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	res.header('Access-Control-Allow-Headers', 'Content-Type');
-	next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
 });
 
 app.use('/api', require('./app/dispatcher'));
 
 mongoose.connection
-	.on('error', function(err) {console.log(err.message)})
-	.on('disconnected', function() {
-		console.log('Mongoose connnection to DB has been disconnected');
-	})
-	.on('connected', function() {
-		app.listen(process.env.PORT || 27017, process.env.IP);
-	});
+    .on('error', function(err) {console.log(err.message)})
+    .on('disconnected', function() {
+        console.log('Mongoose connnection to DB has been disconnected');
+    })
+    .on('connected', function() {
+        app.listen(process.env.PORT || DEFAULT_APP_SERVER_PORT, process.env.IP);
+    });
 
 var closeDBConnection = function() {
-	mongoose.connection.close(function() { process.exit(0); });
+    mongoose.connection.close(function() { process.exit(0); });
 };
 process.on('SIGINT', closeDBConnection).on('SIGTERM', closeDBConnection);
 

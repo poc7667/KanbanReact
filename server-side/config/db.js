@@ -1,3 +1,3 @@
 module.exports = {
-	connectString: 'mongodb://localhost/kanbanapi'
+    connectString: 'mongodb://localhost/kanbanapi'
 };
