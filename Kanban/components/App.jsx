@@ -68,7 +68,7 @@ class App extends React.Component {
         });
     }
 
-    updateTask(cardId, taskId, taskIndex){
+    toggleTask(cardId, taskId, taskIndex){
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
@@ -105,7 +105,7 @@ class App extends React.Component {
                                 taskCallbacks={
                                     {
                                         add: this.addTask.bind(this),
-                                        update: this.updateTask.bind(this),
+                                        toggle: this.toggleTask.bind(this),
                                         delete: this.deleteTask.bind(this)
                                     }
                                 }

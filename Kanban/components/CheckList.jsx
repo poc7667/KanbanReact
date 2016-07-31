@@ -15,7 +15,7 @@ class CheckList extends React.Component{
         let tasks = this.props.tasks.map((task, taskIndex) => (
             <li className="checklist_task" key={task._id}>
                 <input type="checkbox" checked={task.done} 
-                onChange={this.props.taskCallbacks.update.bind(null, this.props.cardId, task._id, taskIndex)} />
+                onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task._id, taskIndex)} />
                 {task.name}
                 {JSON.stringify(task)}
                 <a href="#" className="checklist_task_remove"
