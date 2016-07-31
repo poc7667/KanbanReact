@@ -12,7 +12,7 @@ class List extends React.Component{
                         taskCallbacks={this.props.taskCallbacks} 
                         title={card.title}
                         description={card.description}
-                        tasks={card.tasks}                
+                        tasks={card.tasks}
                 />}
         );
         return(

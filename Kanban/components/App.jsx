@@ -3,39 +3,6 @@ import 'whatwg-fetch';
 import update from 'react-addons-update';
 import KanbanContainer from './KanbanContainer.jsx';
 
-// let cardsList = [
-//     {
-//         id: 1,
-//         title: 'Read the book',
-//         description: '<p>I should read the <strong>whole</strong> book.</p>',
-//         status: 'in-progress',
-//         tasks: []
-//     },
-//     {
-//         id: 2,
-//         title: 'Write some code',
-//         description: '<p>I should write some code from <a href="https://github.com/" target="_blank">github</a>.</p>',
-//         status: 'todo',
-//         tasks: [
-//             {
-//                 id: 1,
-//                 name: "Contact Example",
-//                 done: true
-//             },
-//             {
-//                 id: 2,
-//                 name: "Kanban Example",
-//                 done: false
-//             },
-//             {
-//                 id: 3,
-//                 name: "My own code",
-//                 done: false
-//             }        
-//         ]
-//     }
-// ]
-
 // const API_URL = 'https://ucsc-react-class-kanban-server-winwust.c9users.io/api';
 const API_URL = 'http://0.0.0.0:8081/api';
 const API_JSON_HEADERS = {
@@ -100,6 +67,24 @@ class App extends React.Component {
             headers: API_JSON_HEADERS
         });
     }
+
+    updateTask(cardId, taskId, taskIndex){
+        let cardIndex = this.state.cards.findIndex(
+                (card) => card._id === cardId
+            );
+        this.state.cards[cardIndex].tasks[taskIndex].done = !this.state.cards[cardIndex].tasks[taskIndex].done
+        let nextState = update(this.state.cards, {
+            [cardIndex]: {
+                tasks: {$set: this.state.cards[cardIndex].tasks}
+            }
+        });
+        this.setState({cards: nextState});
+        fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
+            method: 'put',
+            headers: API_JSON_HEADERS,
+            body: JSON.stringify({taskstatus: this.state.cards[cardIndex].tasks[taskIndex]})
+        });
+    }
     
     componentDidMount() {
         fetch(`${API_URL}/cards`, {headers: API_JSON_HEADERS})
@@ -120,6 +105,7 @@ class App extends React.Component {
                                 taskCallbacks={
                                     {
                                         add: this.addTask.bind(this),
+                                        update: this.updateTask.bind(this),
                                         delete: this.deleteTask.bind(this)
                                     }
                                 }
