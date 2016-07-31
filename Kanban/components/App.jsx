@@ -1,49 +1,73 @@
 import React from 'react';
-import KanbanContainer from './KanbanContainer.jsx';
 import 'whatwg-fetch';
 import update from 'react-addons-update';
+import KanbanContainer from './KanbanContainer.jsx';
 
-const API_URL = 'https://ucsc-react-class-kanban-server-winwust.c9users.io/api';
+// let cardsList = [
+//     {
+//         id: 1,
+//         title: 'Read the book',
+//         description: '<p>I should read the <strong>whole</strong> book.</p>',
+//         status: 'in-progress',
+//         tasks: []
+//     },
+//     {
+//         id: 2,
+//         title: 'Write some code',
+//         description: '<p>I should write some code from <a href="https://github.com/" target="_blank">github</a>.</p>',
+//         status: 'todo',
+//         tasks: [
+//             {
+//                 id: 1,
+//                 name: "Contact Example",
+//                 done: true
+//             },
+//             {
+//                 id: 2,
+//                 name: "Kanban Example",
+//                 done: false
+//             },
+//             {
+//                 id: 3,
+//                 name: "My own code",
+//                 done: false
+//             }        
+//         ]
+//     }
+// ]
+
+// const API_URL = 'https://ucsc-react-class-kanban-server-winwust.c9users.io/api';
+const API_URL = 'http://0.0.0.0:8081/api';
 const API_JSON_HEADERS = {
     'Content-Type': 'application/json'
 };
 
-export default class App extends React.Component {
-
-    constructor(props, context){
-        super(props, context)
+class App extends React.Component {
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             cards: []
         };
     }
-
-    componentDidMount() {
-        fetch(`${API_URL}/cards`, {headers: API_JSON_HEADERS})  
-            .then((resp) => resp.json())
-            .then((respData) =>{
-                this.setState({cards: respData})
-            })
-            .catch((err)=>{console.log(err)});
-    }
-
+    
     addTask(cardId, taskName) {
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
 
-//      let newTask = {
-//          id: uuid.v4(), 
-//          name: taskName,
-//          done: false
-//      };
+        let newTask = {
+            id: 1, 
+            name: taskName,
+            done: false
+        };
         
-//      let nextState = update(this.state.cards, {
-//          [cardIndex]: {
-//              tasks: {$push: [newTask]}
-//          }
-//      });
+        let nextState = update(this.state.cards, {
+            [cardIndex]: {
+                tasks: {$push: [newTask]}
+            }
+        });
 
-//      this.setState({cards: nextState});
+        this.setState({cards: nextState});
 
         fetch(`${API_URL}/cards/${cardId}/tasks`, {
             method: 'post',
@@ -63,40 +87,46 @@ export default class App extends React.Component {
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
-
-
-        // 我們要保存 previous state 才可以保存上次狀態
         let nextState = update(this.state.cards, {
             [cardIndex]: {
                 tasks: {$splice: [[taskIndex, 1]]}
             }
-        });        
-        debugger;
+        });
 
         this.setState({cards: nextState});
 
-        console.log(`delete card ${cardId}, ${taskId}, ${taskIndex}`);
         fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
             method: 'delete',
             headers: API_JSON_HEADERS
         });
-    }    
-
-
-    render(){
-        return (<div>
-            <h1>Kanban Project</h1>
-            <KanbanContainer cards={this.state.cards} 
-                            taskCallbacks={
-                                {
-                                    add: this.addTask.bind(this),
-                                    delete: this.deleteTask.bind(this)
+    }
+    
+    componentDidMount() {
+        fetch(`${API_URL}/cards`, {headers: API_JSON_HEADERS})
+        .then((response) => response.json())
+        .then((responseData) => {
+            this.setState({cards: responseData});
+        })
+        .catch((error) => {
+            console.log('Error fetching and parsing data', error);
+        });
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>Kanban Project</h1>
+                <KanbanContainer cards={this.state.cards}
+                                taskCallbacks={
+                                    {
+                                        add: this.addTask.bind(this),
+                                        delete: this.deleteTask.bind(this)
+                                    }
                                 }
-                            }
-            />
-        </div>)
-        
-            
-        ;
+                />
+            </div>
+        )
     }
 }
+
+export default App;

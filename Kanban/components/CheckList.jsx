@@ -21,7 +21,7 @@ class CheckList extends React.Component{
                                         task._id,
                                         taskIndex
                                     )}
-                />                
+                ></a>
             </li>
         ));
 
