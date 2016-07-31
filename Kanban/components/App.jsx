@@ -4,7 +4,13 @@ import update from 'react-addons-update';
 import KanbanContainer from './KanbanContainer.jsx';
 
 // const API_URL = 'https://ucsc-react-class-kanban-server-winwust.c9users.io/api';
-const API_URL = 'http://0.0.0.0:8081/api';
+if (window.location.host.match(/pochsu/)) {
+    const API_URL = 'http://159.203.198.218:8081/api';
+}
+else {
+    const API_URL = 'http://0.0.0.0:8081/api';
+}
+
 const API_JSON_HEADERS = {
     'Content-Type': 'application/json'
 };
