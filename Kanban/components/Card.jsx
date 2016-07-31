@@ -26,12 +26,16 @@ class Card extends React.Component{
                 </div>
                 {
                     this.state.showDetails?
-                        <div className="card_details">                            
+                        <div className="card_details">
                             <div dangerouslySetInnerHTML={{__html:this.props.description}}></div>
-                            <CheckList cardId={this.props.id} 
-                            tasks={this.props.tasks}>
+                            <CheckList 
+                                cardId={this.props.id} 
+                                 tasks={this.props.tasks}
+                                taskCallbacks={this.props.taskCallbacks} 
+                            >
+                            
                             </CheckList>
-                        </div>                    
+                        </div>
                     :
                         <div></div>
                 }

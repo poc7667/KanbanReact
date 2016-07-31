@@ -37,7 +37,7 @@ import KanbanContainer from './KanbanContainer.jsx';
 // ]
 
 // const API_URL = 'https://ucsc-react-class-kanban-server-winwust.c9users.io/api';
-const API_URL = "http://127.0.0.1:8081/api"
+const API_URL = 'http://0.0.0.0:8081/api';
 const API_JSON_HEADERS = {
     'Content-Type': 'application/json'
 };
@@ -87,7 +87,6 @@ class App extends React.Component {
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
-
         let nextState = update(this.state.cards, {
             [cardIndex]: {
                 tasks: {$splice: [[taskIndex, 1]]}

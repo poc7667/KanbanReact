@@ -3,6 +3,13 @@
 go to the parent folder of `Kanban`
 
 run `webpack-dev-server`
+# 2016-07-26
+
+webpack-dev-server
+
+hotswap 動態更新
+
+
 
 
 # instructors
