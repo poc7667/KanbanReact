@@ -14,6 +14,14 @@ class App extends React.Component {
             hash: ''
         };
     }
+    componentDidMount(){
+        window.addEventListener('hashChange', ()=>{
+            this.setState({
+                route: window.location.hash.substr(1) 
+            });            
+        });
+    }
+
     render() {
         let Child;
         switch(this.state.route){
@@ -35,7 +43,7 @@ class App extends React.Component {
                 </ul></div>
                 <Child />
 
-                
+
             </div>
             
         );

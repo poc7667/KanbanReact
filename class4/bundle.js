@@ -21155,6 +21155,17 @@
 	    }
 	
 	    _createClass(App, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            window.addEventListener('hashChange', function () {
+	                _this2.setState({
+	                    route: window.location.hash.substr(1)
+	                });
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var Child = void 0;
