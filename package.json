@@ -21,6 +21,7 @@
   "devDependencies": {
     "css-loader": "^0.23.1",
     "json-loader": "^0.5.4",
+    "node-uuid": "^1.4.7",
     "react-addons-update": "^15.2.1",
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
