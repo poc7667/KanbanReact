@@ -32,9 +32,9 @@ class Card extends React.Component{
                                 cardId={this.props.id} 
                                  tasks={this.props.tasks}
                                 taskCallbacks={this.props.taskCallbacks} 
-                            >
+                            />
                             
-                            </CheckList>
+
                         </div>
                     :
                         <div></div>

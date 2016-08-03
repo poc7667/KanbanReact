@@ -25,6 +25,7 @@ class App extends React.Component {
     }
     
     addTask(cardId, taskName) {
+    		let prevState = this.state;
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
@@ -58,6 +59,7 @@ class App extends React.Component {
     }
 
     deleteTask(cardId, taskId, taskIndex) {
+    		let prevState = this.state;
         let cardIndex = this.state.cards.findIndex(
                 (card) => card._id === cardId
             );
@@ -105,20 +107,22 @@ class App extends React.Component {
     }
     
     render() {
+        console.log('children components in App', this.props.children);
+        let kanbanContainer = React.cloneElement(
+            this.props.children, {
+                cards: this.state.cards,
+                taskCallbacks: {
+                    add: this.addTask.bind(this),
+                    delete: this.deleteTask.bind(this)
+                }
+            });
+            
         return (
             <div>
                 <h1>Kanban Project</h1>
-                <KanbanContainer cards={this.state.cards}
-                                taskCallbacks={
-                                    {
-                                        add: this.addTask.bind(this),
-                                        toggle: this.toggleTask.bind(this),
-                                        delete: this.deleteTask.bind(this)
-                                    }
-                                }
-                />
+                <div>{kanbanContainer}</div>
             </div>
-        )
+        )     
     }
 }
 
