@@ -11,7 +11,7 @@ class AppRouter extends React.Component {
             <Router history={hashHistory}>
                 <Route component={App}>
                     <Route path="/" component={KanbanContainer}>
-                        <Route path="new" component={NewCard}/>
+                        <Route path="new" component={NewCard} router={this.context.router} />
                         <Route path="edit/:card_id" component={EditCard}/>
                     </Route>
                 </Route>
