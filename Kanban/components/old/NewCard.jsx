@@ -4,9 +4,10 @@ import CardForm from './CardForm.jsx';
 
 class NewCard extends React.Component {
     constructor(props, context) {
+        debugger
         super(props, context);
         this.state = {
-            _id: uuid.v4(), // id vs. _id??? simulate the card stored at the server (mongo db)
+            id: uuid.v4(),
             title: '',
             description: '',
             status: 'todo',
@@ -14,17 +15,16 @@ class NewCard extends React.Component {
         };
     }
     
-    handleChange(field, value) {
-        this.setState({[field]: value});
+    handleChange() {
+        
     }
     
-    handleSubmit(evt) {
-		evt.preventDefault();
-		this.props.cardCallbacks.add(this.state);
-		this.context.router.push('/');
+    handleSubmit() {
+        
     }
     
     handleClose() {
+        debugger
         this.context.router.push('/');
     }
     
@@ -39,11 +39,5 @@ class NewCard extends React.Component {
         )
     }
 }
-
-// Have to include this statement
-// http://stackoverflow.com/questions/36330617/this-props-history-is-deprecated-react-router
-NewCard.contextTypes = {
-	router: React.PropTypes.object.isRequired
-};
 
 export default NewCard;
