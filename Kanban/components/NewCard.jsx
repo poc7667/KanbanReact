@@ -14,6 +14,7 @@ class NewCard extends React.Component {
         };
     }
     
+    // [field] , 是要動態取值的意思 foo.bar 當今天 bar 是動態的value 就要這樣使用
     handleChange(field, value) {
         this.setState({[field]: value});
     }

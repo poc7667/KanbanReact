@@ -133,6 +133,47 @@ ul {
   background-color: white;
 }
 
+.modal-card input[type=text], 
+.modal-card textarea {
+  display: block;
+  width : 100%;
+  margin: 3px 0;
+  font-size: 13px;
+  border: none;
+}
+
+.modal-card textarea {
+  height: 50px;
+}
+
+.modal-card input[type=text] {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-card input[type=text]:focus,
+.modal-card textarea:focus {
+  outline: dashed thin #999;
+  outline-offset: 2px;
+}
+
+.modal-card label {
+  margin: 3px 0 7px 3px;
+  color: #a7a7a7;
+  display: inline-block;
+  width: 60px;
+}
+
+.actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.modal-card button {
+  font-size:14px;
+  padding: 8px;
+}
+
 .overlay {
   position: absolute;
   width: 100%;
@@ -157,4 +198,28 @@ ul {
   text-decoration: none;
   line-height: 50px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card_edit{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+.card:hover .card_edit{
+  opacity: 1;
+}
+.card_edit a {
+  text-decoration: none;
+  color: #999;
+  font-size: 17px;
+}
+.card_remove:after {
+  display: inline-block;
+  color: #d66;
+  width: 1em;
+  font-family: FontAwesome;
+  content: "\f00d";
 }
